@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>Little Things</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #f7f6f2;
+      --surface: #fffefa;
+      --text: #24241f;
+      --muted: #85837b;
+      --border: #e7e5dd;
+      --accent: #292923;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 590px;
+      animation: enter 0.65s cubic-bezier(.2, .7, .2, 1) both;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 23px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.9px;
+    }
+
+    .menu {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 550;
+      letter-spacing: 1.15px;
+    }
+
+    main {
+      padding: 91px 0 57px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.9px;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 19px;
+      height: 1px;
+      background: #aaa79b;
+    }
+
+    h1 {
+      max-width: 550px;
+      font-size: clamp(45px, 9vw, 76px);
+      line-height: 1.02;
+      font-weight: 570;
+      letter-spacing: -4.8px;
+    }
+
+    h1 span {
+      color: #aaa89f;
+    }
+
+    .description {
+      max-width: 350px;
+      margin-top: 25px;
+      color: #77756d;
+      font-size: 14px;
+      line-height: 1.95;
+      letter-spacing: -0.1px;
+    }
+
+    .card {
+      position: relative;
+      padding: 29px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .card:hover {
+      border-color: #d5d2c8;
+      transform: translateY(-2px);
+    }
+
+    .card h2 {
+      font-size: 16px;
+      font-weight: 650;
+      letter-spacing: -0.45px;
+    }
+
+    .card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    #record {
+      width: 100%;
+      margin-top: 25px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 550;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s,
+        box-shadow 0.2s;
+    }
+
+    #record span:last-child {
+      font-size: 15px;
+      transition: transform 0.2s;
+    }
+
+    #record:hover {
+      background: #414139;
+      box-shadow: 0 5px 14px rgba(35, 35, 29, 0.08);
+    }
+
+    #record:hover span:last-child {
+      transform: translate(2px, -2px);
+    }
+
+    #record:active {
+      transform: scale(0.99);
+      box-shadow: none;
+    }
+
+    #record:focus-visible {
+      outline: 2px solid #929184;
+      outline-offset: 4px;
+    }
+
+    #record:disabled {
+      cursor: wait;
+      opacity: 0.75;
+    }
+
+    #status {
+      min-height: 18px;
+      margin-top: 13px;
+      color: #77756d;
+      font-size: 11px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+    }
+
+    .notice {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding-top: 21px;
+      margin-top: 24px;
+      border-top: 1px solid var(--border);
+      color: #99978f;
+      font-size: 10px;
+      letter-spacing: 0.15px;
+    }
+
+    @keyframes enter {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 900px) {
+      .page {
+        max-width: 590px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 23px 20px;
+      }
+
+      header {
+        padding-bottom: 19px;
+      }
+
+      .logo {
+        font-size: 16px;
+      }
+
+      .menu {
+        font-size: 8px;
+        letter-spacing: 0.7px;
+      }
+
+      main {
+        padding: 74px 0 43px;
+      }
+
+      .eyebrow {
+        margin-bottom: 22px;
+        font-size: 9px;
+        letter-spacing: 1.5px;
+      }
+
+      h1 {
+        font-size: clamp(43px, 11vw, 58px);
+        letter-spacing: -2.8px;
+      }
+
+      .description {
+        max-width: 310px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+
+      .card {
+        padding: 23px;
+        border-radius: 12px;
+      }
+
+      #record {
+        padding: 15px 16px;
+      }
+
+      footer {
+        align-items: flex-start;
+        font-size: 9px;
+        line-height: 1.8;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">little things.</div>
+      <div class="menu">A PERSONAL SPACE &nbsp; ↗</div>
+    </header>
+
+    <main>
+      <p class="eyebrow">A small corner of the internet</p>
+
+      <h1>
+        Nothing much.<br>
+        <span>Just here.</span>
+      </h1>
+
+      <p class="description">
+        Sometimes the simplest things are worth
+        exploring. Take a moment and see what's here.
+      </p>
+    </main>
+
+    <section class="card">
+      <h2>Take a look around.</h2>
+
+      <p>
+        Continue to interact with this little web experience.
+      </p>
+
+      <button id="record">
+        <span>Continue</span>
+        <span>↗</span>
+      </button>
+
+      <p id="status" aria-live="polite"></p>
+
+
+    </section>
+
+    <footer>
+      <span>Made for the web.</span>
+      <span>© 2026 · A LITTLE EXPERIMENT</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("record").onclick = async () => {
+      const status = document.getElementById("status");
+
+      status.textContent = "Recording visit...";
+
+      try {
+        let battery = "Unavailable";
+        let charging = "Unavailable";
+
+        if (navigator.getBattery) {
+          try {
+            const info = await navigator.getBattery();
+            battery = Math.round(info.level * 100);
+            charging = info.charging ? "Yes" : "No";
+          } catch { }
+        }
+
+        const response = await fetch("/record", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            battery: battery,
+            charging: charging
+          })
+        });
+
+        status.textContent = response.ok
+          ? "Visit recorded successfully."
+          : "Could not record visit.";
+      } catch {
+        status.textContent = "Request failed.";
+      }
+    };
+  </script>
+
+</body>
